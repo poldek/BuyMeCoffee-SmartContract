@@ -49,8 +49,6 @@ function Table() {
     </Center>
       
     {coffee.map((item, index) => {        
-        console.log(JSON.stringify(item[3][1], null, 2))
-
         return(
             <Accordion disableChevronRotation  key={index}>
                 <Accordion.Item value="data">
