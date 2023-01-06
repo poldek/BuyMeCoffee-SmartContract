@@ -17,9 +17,7 @@ export default function Home() {
       </Head>
       <main>
         <Container>
-          <ScrollArea>
-            <Table />
-          </ScrollArea>
+          <Table />
         </Container>
       </main>
     </>
