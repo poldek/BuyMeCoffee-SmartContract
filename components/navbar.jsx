@@ -164,7 +164,7 @@ function Navbar() {
     </UnstyledButton>
   ));
   return (
-    <Box pb={120}>
+    <Box pb={10}>
       <Header height={80} px="xl">
         <Group position="apart" sx={{ height: "100%" }}>
           {dark ?
