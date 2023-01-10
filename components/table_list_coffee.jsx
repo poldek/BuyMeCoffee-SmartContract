@@ -5,35 +5,34 @@ import { ethers } from "ethers";
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import LoaderBar from './loaderBar';
+import moment from 'moment';
 
-function Table() {
+
+function TableListCoffe() {
   const [coffee, setCoffee] = useState([]);
   const itemsPerPage = 5;
   const [page, setPage] = useState(1);
   const pagesCount = Math.ceil(coffee.length / itemsPerPage);
 
+  let details = [];
 
-
-  const CONTRACT_ADDRESS = "0xC249FbA613d6F3118Cf1D14BE9B9d7FbD1Afa156";
+  const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
   const CONTRACT_ABI = CONTRACT.abi;
+  const ALCHEMY_ID = process.env.ALCHEMY_ID;
     
     const getListCoffee = async () => {
         try {
-            
             const provider = new ethers.providers.JsonRpcProvider(
-            "https://polygon-mumbai.g.alchemy.com/v2/c3ua_ZOnchGKvJIVS6tLcwuWyQ3CDJAm"
+                ALCHEMY_ID
             );
             const buyCoffee = new ethers.Contract(
             CONTRACT_ADDRESS,
             CONTRACT_ABI,
             provider
             );
-           
-            const details = await buyCoffee.getAllCoffee();
-            //console.log(JSON.stringify(details, null, 2))
+            details = await buyCoffee.getAllCoffee();
             setCoffee(details);
         } catch (error) {
-           
             console.log(error);
         }
     };
@@ -44,10 +43,19 @@ function Table() {
         return coffee.slice(start, start + itemsPerPage);
     }, [coffee]);
     
+    const convertMattic = (bigNumber) => {
+        let matic = bigNumber / 1E18;
+        return matic;
+    }
+
+    const convertToHumanDate = (timestamp) => {
+        let convertToDateTime = moment.unix(timestamp).format('dddd, MMMM Do, YYYY h:mm:ss A');
+        return convertToDateTime;   
+    }
 
   return (    
     <>
-    <Center my={1}>
+    <Center my={5} mx={5}>
     <Title order={1}>Honorable donor list 
         <Text span color="orange" inherit> By </Text> Wallet
     </Title>
@@ -80,7 +88,16 @@ function Table() {
                         <div style={{ display: 'flex' }}>
                             <Text>Matic:</Text>
                             <Space w="md" />
-                            <Text>{item[2]}</Text>
+                            <Text>
+                             {convertMattic(item['_amount']['_hex'])}
+                            </Text>
+                        </div>
+                        <div style={{ display: 'flex' }}>
+                            <Text>Date:</Text>
+                            <Space w="md" />
+                            <Text>
+                             {convertToHumanDate(item['_timestamp']['_hex'])}
+                            </Text>
                         </div>
                     </Accordion.Panel>
                 </Accordion.Item>
@@ -88,7 +105,6 @@ function Table() {
         );
     })
     : <LoaderBar /> }
-
     <Center mb={30} mt={20}>
         <Pagination page={page} onChange={setPage} total={pagesCount} />
     </Center>
@@ -96,4 +112,4 @@ function Table() {
   )
 }
 
-export default Table;
+export default TableListCoffe;
