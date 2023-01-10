@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    ALCHEMY_ID: process.env.ALCHEMY_ID,
+    INFURA_ID: process.env.INFURA_ID,
     CONTRACT_ADDRESS: process.env.CONTRACT_ADDRESS
   },
 }

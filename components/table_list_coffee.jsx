@@ -1,6 +1,6 @@
 import React from 'react'
 import { Accordion, Title, Text, Center, Pagination, Space } from "@mantine/core";
-import CONTRACT from "../contract/BuyMeCoffee.json";
+import CONTRACT from "../contract/BuyMeCoffee2.json";
 import { ethers } from "ethers";
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
@@ -18,19 +18,19 @@ function TableListCoffe() {
 
   const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
   const CONTRACT_ABI = CONTRACT.abi;
-  const ALCHEMY_ID = process.env.ALCHEMY_ID;
+  const INFURA_ID = process.env.INFURA_ID;
     
     const getListCoffee = async () => {
         try {
             const provider = new ethers.providers.JsonRpcProvider(
-                ALCHEMY_ID
+                INFURA_ID
             );
             const buyCoffee = new ethers.Contract(
             CONTRACT_ADDRESS,
             CONTRACT_ABI,
             provider
             );
-            details = await buyCoffee.getAllCoffee();
+            details = await buyCoffee.getAllBuyMeCoffee();
             setCoffee(details);
         } catch (error) {
             console.log(error);
