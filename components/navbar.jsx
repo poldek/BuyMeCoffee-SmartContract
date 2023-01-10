@@ -281,21 +281,21 @@ function Navbar() {
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
+        <Center inline>
+            <ActionIcon
+              variant="outline"
+              color={dark ? 'yellow' : 'blue'}
+              onClick={() => toggleColorScheme()}
+              title="Toggle color scheme"
+            >
+              {dark ? <IconSun size={30} /> : <IconMoonStars size={30} />}
+            </ActionIcon>
+        </Center>
         <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
           <Divider
             my="sm"
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
-           <Center inline ml={20}>
-               <ActionIcon
-                variant="outline"
-                color={dark ? 'yellow' : 'blue'}
-                onClick={() => toggleColorScheme()}
-                title="Toggle color scheme"
-              >
-              {dark ? <IconSun size={30} /> : <IconMoonStars size={30} />}
-            </ActionIcon>
-              </Center>
           <a href="#" className={classes.link}>
             Home
           </a>
