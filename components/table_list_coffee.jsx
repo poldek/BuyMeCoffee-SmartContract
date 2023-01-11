@@ -9,17 +9,18 @@ import moment from 'moment';
 
 function TableListCoffe() {
 
+  const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
+  const CONTRACT_ABI = CONTRACT.abi;
+  const INFURA_ID = process.env.INFURA_ID;
+
   const [coffee, setCoffee] = useState([]);
   const itemsPerPage = 5;
   const [page, setPage] = useState(1);
   const pagesCount = Math.ceil(coffee.length / itemsPerPage);
+  const start = (page - 1) * itemsPerPage;
 
   let details = [];
 
-  const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
-  const CONTRACT_ABI = CONTRACT.abi;
-  const INFURA_ID = process.env.INFURA_ID;
-    
     const getListCoffee = async () => {
         try {
             const provider = new ethers.providers.JsonRpcProvider(
@@ -31,8 +32,8 @@ function TableListCoffe() {
             provider
             );
             details = await buyCoffee.getAllBuyMeCoffee();
-            console.log(details);
             setCoffee(details);
+            console.log(details);
         } catch (error) {
             console.log(error);
         }
@@ -42,11 +43,6 @@ function TableListCoffe() {
         getListCoffee();
     },[]);
 
-    // const displayData = useMemo(() => {
-    //     const start = (page - 1) * itemsPerPage;
-    //     return coffee.slice(start, start + itemsPerPage);
-    // }, [coffee]);
-    
     const convertMattic = (bigNumber) => {
         let matic = bigNumber / 1E18;
         return matic;
@@ -56,7 +52,7 @@ function TableListCoffe() {
         let convertToDateTime = moment.unix(timestamp).format('dddd, MMMM Do, YYYY h:mm:ss A');
         return convertToDateTime;   
     }
-     const start = (page - 1) * itemsPerPage;
+
      const displayDataCoffe = coffee.slice(start, start+ itemsPerPage)
             .map((item, index) => {
                 return(
@@ -66,19 +62,21 @@ function TableListCoffe() {
                                 <div style={{ display: 'flex' }}>
                                     <Text>Name:</Text>
                                     <Space w="md" />
-                                    <Text>{item[0]}</Text>
+                                    <Text>{item['userName']}</Text>
                                 </div>
                                 <div style={{ display: 'flex' }}>
                                     <Text>Description:</Text>
                                     <Space w="md" />
-                                    <Text>{item[1]}</Text>
+                                    <Text>{item['message']}</Text>
                                 </div>
                             </Accordion.Control>
                             <Accordion.Panel>
                                 <div style={{ display: 'flex' }}>
                                     <Text>Wallet:</Text>
                                     <Space w="md" />
-                                    <Link href={`https://mumbai.polygonscan.com/address/${item[2]}`} target="_blank"><Text color={'orange'}>{item[2]}</Text></Link>
+                                    <Link href={`https://mumbai.polygonscan.com/address/${item['sender']}`} target="_blank">
+                                        <Text color={'orange'}>{item['sender']}</Text>
+                                    </Link>
                                 </div>
                             </Accordion.Panel>
                             <Accordion.Panel>    
@@ -86,14 +84,14 @@ function TableListCoffe() {
                                     <Text>Matic:</Text>
                                     <Space w="md" />
                                     <Text>
-                                    {/* {convertMattic(item['_amount']['_hex'])} */}
+                                    {convertMattic(item['amount']['_hex'])}
                                     </Text>
                                 </div>
                                 <div style={{ display: 'flex' }}>
                                     <Text>Date:</Text>
                                     <Space w="md" />
                                     <Text>
-                                    {/* {convertToHumanDate(item['_timestamp']['_hex'])} */}
+                                    {convertToHumanDate(item['timeStamp']['_hex'])}
                                     </Text>
                                 </div>
                             </Accordion.Panel>
