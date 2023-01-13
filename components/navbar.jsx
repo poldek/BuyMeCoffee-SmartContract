@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { IconWallet } from '@tabler/icons';
 import logoPicWhite from "../public/pgmsoft_white.png";
 import logoPicColor from "../public/pgmsoft_color.png";
 import Metamsk from "../utils/checkMetask";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { signIn } from "next-auth/react";
+import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
+import { useRouter } from "next/router";
+import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
+import { signOut } from "next-auth/react";
+import { showNotification } from '@mantine/notifications';
 
 import {
   createStyles,
@@ -140,14 +148,57 @@ const mockdata = [
   },
 ];
 
-export default function Navbar () {
+export default function Navbar ({ user }) {
+
+  const { connectAsync } = useConnect();
+  const { disconnectAsync } = useDisconnect();
+  const { isConnected } = useAccount();
+  const { signMessageAsync } = useSignMessage();
+  const { requestChallengeAsync } = useAuthRequestChallengeEvm();
+  const { push } = useRouter();
 
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'light';
+  
   const { metamask } = Metamsk();
+  const [loginProgress, setLoginProgress] = useState(false);
+
+    const handleAuth = async () => {
+    try {
+      if (isConnected) {
+        await disconnectAsync();
+      }
+      const { account, chain } = await connectAsync({
+        connector: new MetaMaskConnector(),
+      });
+        setLoginProgress(true);
+        const { message } = await requestChallengeAsync({
+              address: account,
+              chainId: chain.id
+        });
+      
+        const signature = await signMessageAsync({ message });
+        const { url } = await signIn("moralis-auth", {
+          message,
+          signature,
+          redirect: false,
+          callbackUrl: "/profile",
+        });
+        push(url);
+      } catch(error) {
+        console.log("Error: " + JSON.stringify(error, null, 2))
+        setLoginProgress(false);
+        showNotification({
+            autoClose:false,
+            color: 'red',
+            title: error.code,
+            message: error.reason + " " + error.from,
+        });
+      }
+  }
 
 
   const links = mockdata.map((item) => (
@@ -262,13 +313,26 @@ export default function Navbar () {
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
+          
             {metamask 
-              ? 
-              <Button variant="default">Log in</Button> 
-              :
-             <Text fw={700} c={"orange"}>
-                It apprears that Metamask is not installed, <br />
-                Download <a href="https://metamask.io/" target="_blank">Metamask</a> to continue.</Text>}
+                ? 
+                  user 
+                  ? 
+                    <Button leftIcon={<IconWallet size={14} />} color="orange" onClick={() => signOut({ redirect: "/" })}>
+                      Sign out
+                    </Button>
+                  : 
+                   loginProgress 
+                   ? 
+                    <Button onClick={handleAuth} leftIcon={<IconWallet size={14} />} color="orange" loading loaderPosition="center">Login via Metamask</Button>
+                   : 
+                  <Button onClick={handleAuth} leftIcon={<IconWallet size={14} />} color="orange" >Login via Metamask</Button>
+                :
+              <Text fw={700} c={"orange"}>
+                  It apprears that Metamask is not installed, <br />
+                  Download <a href="https://metamask.io/" target="_blank">Metamask</a> to continue.
+              </Text>
+            }
             <ActionIcon
               variant="outline"
               color={dark ? 'yellow' : 'blue'}
@@ -335,7 +399,25 @@ export default function Navbar () {
           />
 
           <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
+          {metamask 
+                ? 
+                  user 
+                  ? 
+                    <Button leftIcon={<IconWallet size={14} />} color="orange" onClick={() => signOut({ redirect: "/" })}>
+                      Sign out
+                    </Button>
+                  : 
+                   loginProgress 
+                   ? 
+                    <Button onClick={handleAuth} leftIcon={<IconWallet size={14} />} color="orange" loading loaderPosition="center">Login via Metamask</Button>
+                   : 
+                  <Button onClick={handleAuth} leftIcon={<IconWallet size={14} />} color="orange" >Login via Metamask</Button>
+                :
+              <Text fw={700} c={"orange"}>
+                  It apprears that Metamask is not installed, <br />
+                  Download <a href="https://metamask.io/" target="_blank">Metamask</a> to continue.
+              </Text>
+            }
           </Group>
         </ScrollArea>
       </Drawer>
