@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
                 colorScheme: colorScheme,
               }}
             >
-            <NotificationsProvider>
+            <NotificationsProvider position="top-right" zIndex={2077}>
               <Layout>
                 <Component {...pageProps} />
               </Layout>
