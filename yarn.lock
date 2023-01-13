@@ -789,110 +789,110 @@
     "@json-rpc-tools/types" "^1.7.6"
     "@pedrouid/environment" "^1.0.1"
 
-"@mantine/core@^5.9.5", "@mantine/core@5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/core/-/core-5.9.5.tgz"
-  integrity sha512-A3cYzGOJ9BpU6tgqTl8qzOe8mmqzvuB76N6IHsPjk+uhbQCBXuNaoxOemP0wEM4HpEAzH1FR1kGhk6tO3gogUA==
+"@mantine/core@^5.10.0", "@mantine/core@5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/core/-/core-5.10.0.tgz"
+  integrity sha512-if272RiYPK0nQQdGNwcCSY7bCPJW9455qXlRhnYOr021xh89T8WFVPeDw4uwcxoXsXdKRV5GAi9irSnsUqsjJQ==
   dependencies:
     "@floating-ui/react-dom-interactions" "^0.10.1"
-    "@mantine/styles" "5.9.5"
-    "@mantine/utils" "5.9.5"
+    "@mantine/styles" "5.10.0"
+    "@mantine/utils" "5.10.0"
     "@radix-ui/react-scroll-area" "1.0.2"
     react-textarea-autosize "8.3.4"
 
-"@mantine/dates@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/dates/-/dates-5.9.5.tgz"
-  integrity sha512-lxjkoZ3DXIrJ/81X6FMd14PNoLE5qFm/cJumba0wy1OkhFjj2Ua9qEWOQs3lnjnrj9ocxCAy5DkRAoGdNfUNtQ==
+"@mantine/dates@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/dates/-/dates-5.10.0.tgz"
+  integrity sha512-gK+BiXaTY9X1ESjRPNI7CASYx/QseDolNUJBqvXw6YB19QQ/PFCnyoj3xGiJUqiYfzKbFDKfTVSkP5cR6SHljA==
   dependencies:
-    "@mantine/utils" "5.9.5"
+    "@mantine/utils" "5.10.0"
 
-"@mantine/dropzone@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/dropzone/-/dropzone-5.9.5.tgz"
-  integrity sha512-Xh/U3dEK//p23yCGCPnd/9Q0HyjOrm9fsxRYifvmCFfzpSUKsBu25HxtiYJaG50nSHCincJCmIvbTB10kyDWCA==
+"@mantine/dropzone@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/dropzone/-/dropzone-5.10.0.tgz"
+  integrity sha512-SpDi9FEFCtNZnxfGojvrUg3zwoe4Ueyip0dIJ6D70/q6M7WMStuLhDVVLUgrhAr0REArUa3HWPx9AfdZ/TAOEg==
   dependencies:
-    "@mantine/utils" "5.9.5"
+    "@mantine/utils" "5.10.0"
     react-dropzone "14.2.3"
 
-"@mantine/form@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/form/-/form-5.9.5.tgz"
-  integrity sha512-paOJggdQR+KGUtpCW3inH8hu12TwHMwDrOmMbqgaWuuRuwY+kZUnLtf7akLLnwH/C9S/YsDJ9B9QGHaQElilFw==
+"@mantine/form@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/form/-/form-5.10.0.tgz"
+  integrity sha512-4X9RR75Aaq0fxu+kJ/mL/CAOPlgHNhbUY657hGJlfwqWJFwibnhyCe1s5lpZ7Sm8F3hNsSMpWzdA687gvhw4Lw==
   dependencies:
     fast-deep-equal "^3.1.3"
     klona "^2.0.5"
 
-"@mantine/hooks@5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-5.9.5.tgz"
-  integrity sha512-6u0oj5zFYAP8bY+iW5Y5HEFS6tZmvJN5KwNPH+F2Omw61hN7shehHED7Jbe5zkxcggFvqmkA/6FMk+VYfovmkA==
+"@mantine/hooks@^5.10.0", "@mantine/hooks@5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-5.10.0.tgz"
+  integrity sha512-dAefxpvqjFtXNeKse+awkIa4U1XGnMMOqWg1+07Y2Ino2G6EiT8AEnYqQyTXgcPoNaWwG9533Q/DDadmyweqaQ==
 
-"@mantine/modals@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/modals/-/modals-5.9.5.tgz"
-  integrity sha512-ZVtvzHCyjkkztWhz3gkbsX8wdm7j0lN8dAaF51xvQHs9eZPgP5gXzyGpqeU23trk8O+4b6nY/TT2+5amJ/SKrQ==
+"@mantine/modals@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/modals/-/modals-5.10.0.tgz"
+  integrity sha512-SP9mPoa7FlfGkVzjVMUZ36i7YmYMh7p/9CoeWT/0Rcy7WmOfotNBbs/H/9CXdMNVNZTkehEeHoKeVy9oEkk2zg==
   dependencies:
-    "@mantine/utils" "5.9.5"
+    "@mantine/utils" "5.10.0"
 
-"@mantine/next@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/next/-/next-5.9.5.tgz"
-  integrity sha512-XDDaD7Lla+ldmVu9cS10ExspwuSB2Cz/AyawjhFaMpOzTgM0dtztCCgWT2Pvku4rMp+SKKBkAlFdlBAPy263mg==
+"@mantine/next@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/next/-/next-5.10.0.tgz"
+  integrity sha512-ImsY1JcA3h8ojPCVDGjKvTnLqpFEecPcgwYNTIUeYGP9FHB9NXhIDLS2aeeKPrgw2dNO8vtRY5aXTPqt2spLag==
   dependencies:
-    "@mantine/ssr" "5.9.5"
-    "@mantine/styles" "5.9.5"
+    "@mantine/ssr" "5.10.0"
+    "@mantine/styles" "5.10.0"
 
-"@mantine/notifications@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/notifications/-/notifications-5.9.5.tgz"
-  integrity sha512-RGr48xPVMjlt0l6LEG7sncgTf4oKHxBDtLYOBwybNuLs1pcpmoHGdcgCkvINnXKWFHF8IQG/l3eDlKBseromJQ==
+"@mantine/notifications@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/notifications/-/notifications-5.10.0.tgz"
+  integrity sha512-ipqH8ia0ibjHj1+4hIgFmYK5RbmGX2oEyZWoIYVie5rwf8OgdIQOjF4LaZw+KVw0QPvNajj9Fj4AQay5egJSDQ==
   dependencies:
-    "@mantine/utils" "5.9.5"
+    "@mantine/utils" "5.10.0"
     react-transition-group "4.4.2"
 
-"@mantine/nprogress@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/nprogress/-/nprogress-5.9.5.tgz"
-  integrity sha512-WJtdV6FrRB3LYm56WhWvezRQ/wCrgjd2kn6AciY2KS2nDhOBeZOSfZCEMSuvkOuQUTktQCL9l30oasbJNm8O0w==
+"@mantine/nprogress@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/nprogress/-/nprogress-5.10.0.tgz"
+  integrity sha512-7xKyqjnWbJr5W2I5V9V2X10w7GRyqJHZArVnAVJuyiAedTZNPVuIye6yfPB7Lo+ZvVifYTwyaXE8Xk2IvPfsvw==
   dependencies:
-    "@mantine/utils" "5.9.5"
+    "@mantine/utils" "5.10.0"
 
-"@mantine/prism@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/prism/-/prism-5.9.5.tgz"
-  integrity sha512-Z3qO4t1OP1GS07ywUmPxf1vgZRaZj3VjQnPhr8Ludbqz4CY8LjPfclpcUHeZLbFsOi+P98JWzH4E/R4UNqiWOA==
+"@mantine/prism@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/prism/-/prism-5.10.0.tgz"
+  integrity sha512-27WvnbjmWtxICqhmWYBbo2bhyd/W+zJQuVJu15KCJMUgMUxaTETUgHFsY1ki0+Ha9UypQu2VRSfZTaLV3y9e7Q==
   dependencies:
-    "@mantine/utils" "5.9.5"
+    "@mantine/utils" "5.10.0"
     prism-react-renderer "^1.2.1"
 
-"@mantine/ssr@5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/ssr/-/ssr-5.9.5.tgz"
-  integrity sha512-F/6m/YIro9VWlCBdw3aEQTS1OLPHeiMN/oaV9by5IZbsjiCDSTDA2ChCbzMRhftVjkX8Nd8wb9VfXjg7M5SBFw==
+"@mantine/ssr@5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/ssr/-/ssr-5.10.0.tgz"
+  integrity sha512-nkSaSH/wJlZHuBswBCRwXKuTXEH5b/cBxca54dK/8qFB3/LtVDibmEg+yAE5RDfw/0W+N+37+0G64TRysE1ZHA==
   dependencies:
-    "@mantine/styles" "5.9.5"
+    "@mantine/styles" "5.10.0"
     html-react-parser "1.4.12"
 
-"@mantine/styles@5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/styles/-/styles-5.9.5.tgz"
-  integrity sha512-Rixu60eVS9aP8ugTM0Yoc5MpXXsfemRlu2PDZGL0fhcOyUYHi5mXvlhgxqrET3zkFrBJ+PHuPLQBgBimffGqiw==
+"@mantine/styles@5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/styles/-/styles-5.10.0.tgz"
+  integrity sha512-3JBM5LWJHb4Yk7jymPiSuaBJRoe2CgA7KoyYWgabwBP115GlHPb1rQCcavJsobHV4U+wFfZEEUnVBpaAaXqgmw==
   dependencies:
     clsx "1.1.1"
     csstype "3.0.9"
 
-"@mantine/tiptap@^5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/tiptap/-/tiptap-5.9.5.tgz"
-  integrity sha512-fLSLMcXRH1tZQ6/PSvsqYeYSqqNjdwuVvrvx7T01YasVcQs0/r5XYSHas5rOX8eNhwJNZOFT35K0JcNTmNnYaw==
+"@mantine/tiptap@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/tiptap/-/tiptap-5.10.0.tgz"
+  integrity sha512-N5OVtFDcrLx9WJ+OiKaQiMjTBREH5W6RLL6sukosq6/p7zd7N84U6DlNBEneAZUyy2JtM2fWE0SNMo4B57gH0A==
   dependencies:
-    "@mantine/utils" "5.9.5"
+    "@mantine/utils" "5.10.0"
 
-"@mantine/utils@5.9.5":
-  version "5.9.5"
-  resolved "https://registry.npmjs.org/@mantine/utils/-/utils-5.9.5.tgz"
-  integrity sha512-OtMOvXMyqpZ+Tz25DYRwRkvERvmF4L0RJiq+JnXk+1yKDvG+JZQuMMLnt0nZ81T6q7uzDSA29cJ45syHL2BXmQ==
+"@mantine/utils@5.10.0":
+  version "5.10.0"
+  resolved "https://registry.npmjs.org/@mantine/utils/-/utils-5.10.0.tgz"
+  integrity sha512-mHnNm0ajIa8qLAIEwv82N6+7YKecynOA3I8vzgBHXS2x4HwGsHITFYGmMh2LNpx5dRL034tObfEFYZXqncyEDw==
 
 "@metamask/safe-event-emitter@^2.0.0", "@metamask/safe-event-emitter@2.0.0":
   version "2.0.0"

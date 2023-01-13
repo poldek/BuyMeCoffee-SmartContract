@@ -5,7 +5,8 @@ import { ethers } from "ethers";
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import LoaderBar from './loaderBar';
-import moment from 'moment';
+import DateToHuman from '../utils/dateToHuman'
+import MaticToHuman from '../utils/maticToHuman'
 
 function TableListCoffe() {
 
@@ -33,7 +34,6 @@ function TableListCoffe() {
             );
             details = await buyCoffee.getAllBuyMeCoffee();
             setCoffee(details);
-            console.log(details);
         } catch (error) {
             console.log(error);
         }
@@ -43,18 +43,8 @@ function TableListCoffe() {
         getListCoffee();
     },[]);
 
-    const convertMattic = (bigNumber) => {
-        let matic = bigNumber / 1E18;
-        return matic;
-    }
-
-    const convertToHumanDate = (timestamp) => {
-        let convertToDateTime = moment.unix(timestamp).format('dddd, MMMM Do, YYYY h:mm:ss A');
-        return convertToDateTime;   
-    }
-
-     const displayDataCoffe = coffee.slice(start, start+ itemsPerPage)
-            .map((item, index) => {
+    const displayDataCoffe = coffee.slice(start, start+ itemsPerPage)
+        .map((item, index) => {
                 return(
                     <Accordion disableChevronRotation  key={index} >
                         <Accordion.Item value="data">
@@ -84,14 +74,14 @@ function TableListCoffe() {
                                     <Text>Matic:</Text>
                                     <Space w="md" />
                                     <Text>
-                                    {convertMattic(item['amount']['_hex'])}
+                                    {MaticToHuman(item['amount']['_hex'])}
                                     </Text>
                                 </div>
                                 <div style={{ display: 'flex' }}>
                                     <Text>Date:</Text>
                                     <Space w="md" />
                                     <Text>
-                                    {convertToHumanDate(item['timeStamp']['_hex'])}
+                                    {DateToHuman(item['timeStamp']['_hex'])}
                                     </Text>
                                 </div>
                             </Accordion.Panel>

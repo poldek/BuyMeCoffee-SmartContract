@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { useState } from "react";
 import { MantineProvider,ColorSchemeProvider} from "@mantine/core";
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { NotificationsProvider } from '@mantine/notifications';
 import Layout from "../components/_layout";
 import {
   createClient,
@@ -44,9 +45,11 @@ function MyApp({ Component, pageProps }) {
                 colorScheme: colorScheme,
               }}
             >
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <NotificationsProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </NotificationsProvider>
           </MantineProvider>
       </ColorSchemeProvider>
       </SessionProvider>
