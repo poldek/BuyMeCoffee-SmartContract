@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import logoPicWhite from "../public/pgmsoft_white.png";
 import logoPicColor from "../public/pgmsoft_color.png";
+import Metamsk from "../utils/checkMetask";
+
 import {
   createStyles,
   Header,
@@ -34,6 +36,7 @@ import {
   IconChevronDown,
   IconSun, IconMoonStars 
 } from "@tabler/icons";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -137,14 +140,15 @@ const mockdata = [
   },
 ];
 
-function Navbar() {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-    useDisclosure(false);
+export default function Navbar () {
+
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
-
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'light';
+  const { metamask } = Metamsk();
+
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -168,20 +172,25 @@ function Navbar() {
       <Header height={80} px="xl">
         <Group position="apart" sx={{ height: "100%" }}>
           {dark ?
-            <Image
-              src={logoPicColor}
-              alt="PGMSOFT LTD"
-              priority
-              width={250}
-              height={50}
-            /> : 
-            <Image
-              src={logoPicWhite}
-              alt="PGMSOFT LTD"
-              priority
-              width={250}
-              height={50}
-            /> 
+            <Link href="/">
+                <Image
+                  src={logoPicColor}
+                  alt="PGMSOFT LTD"
+                  priority
+                  width={250}
+                  height={50}
+                /> 
+            </Link>
+            : 
+            <Link href="/">
+              <Image
+                src={logoPicWhite}
+                alt="PGMSOFT LTD"
+                priority
+                width={250}
+                height={50}
+              />
+            </Link>  
           }
           <Group
             sx={{ height: "100%" }}
@@ -253,8 +262,13 @@ function Navbar() {
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            {metamask 
+              ? 
+              <Button variant="default">Log in</Button> 
+              :
+             <Text fw={700} c={"orange"}>
+                It apprears that Metamask is not installed, <br />
+                Download <a href="https://metamask.io/" target="_blank">Metamask</a> to continue.</Text>}
             <ActionIcon
               variant="outline"
               color={dark ? 'yellow' : 'blue'}
@@ -322,12 +336,9 @@ function Navbar() {
 
           <Group position="center" grow pb="xl" px="md">
             <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
           </Group>
         </ScrollArea>
       </Drawer>
     </Box>
   );
 }
-
-export default Navbar;
