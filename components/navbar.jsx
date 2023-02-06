@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { IconWallet } from '@tabler/icons';
 import logoPicWhite from "../public/pgmsoft_white.png";
@@ -9,8 +9,9 @@ import { signIn } from "next-auth/react";
 import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
 import { useRouter } from "next/router";
 import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { showNotification } from '@mantine/notifications';
+
 
 import {
   createStyles,
@@ -30,6 +31,7 @@ import {
   Drawer,
   Collapse,
   ScrollArea,
+  Avatar,
   ActionIcon, useMantineColorScheme
 } from "@mantine/core";
 
@@ -148,8 +150,11 @@ const mockdata = [
   },
 ];
 
-export default function Navbar ({ user }) {
+export default function Navbar () {
 
+  const { data: session, status } = useSession();
+
+  
   const { connectAsync } = useConnect();
   const { disconnectAsync } = useDisconnect();
   const { isConnected } = useAccount();
@@ -248,10 +253,10 @@ export default function Navbar ({ user }) {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="#" className={classes.link}>
+            <Link href="/" className={classes.link}>
               Home
-            </a>
-            <HoverCard
+            </Link>
+            {/* <HoverCard
               width={600}
               position="bottom"
               radius="md"
@@ -304,23 +309,33 @@ export default function Navbar ({ user }) {
                   </Group>
                 </div>
               </HoverCard.Dropdown>
-            </HoverCard>
+            </HoverCard> */}
             <a href="#" className={classes.link}>
               Learn
             </a>
             <a href="#" className={classes.link}>
-              Academy
+              
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
           
             {metamask 
                 ? 
-                  user 
+                   status === "authenticated"
                   ? 
-                    <Button leftIcon={<IconWallet size={14} />} color="orange" onClick={() => signOut({ redirect: "/" })}>
-                      Sign out
-                    </Button>
+                  
+                   <Group
+                    sx={{ height: "100%" }}
+                    spacing={0}
+                    className={classes.hiddenMobile}
+                    >
+                    <Link href="/profile" leftIcon={<IconWallet size={14} />} className={classes.link}>
+                        <Avatar radius="xl" />My Profile
+                      </Link>
+                      <Button leftIcon={<IconWallet size={14} />} color="green" onClick={() => signOut({ redirect: "/" })}>
+                        Sign out
+                      </Button>
+                  </Group>
                   : 
                    loginProgress 
                    ? 
@@ -374,24 +389,26 @@ export default function Navbar ({ user }) {
             my="sm"
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
-          <a href="#" className={classes.link}>
+          <Link href="/" className={classes.link}>
             Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
+          </Link>
+          {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
                 Features
               </Box>
               <IconChevronDown size={16} color={theme.fn.primaryColor()} />
             </Center>
-          </UnstyledButton>
+          </UnstyledButton> */}
           <Collapse in={linksOpened}>{links}</Collapse>
           <a href="#" className={classes.link}>
             Learn
           </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
+          { status === "authenticated" ?
+          <Link href="/profile" className={classes.link}>
+              <Avatar radius="xl" />My Profile
+          </Link>
+          : null}
 
           <Divider
             my="sm"
@@ -401,11 +418,14 @@ export default function Navbar ({ user }) {
           <Group position="center" grow pb="xl" px="md">
           {metamask 
                 ? 
-                  user 
+                   status === "authenticated"
                   ? 
-                    <Button leftIcon={<IconWallet size={14} />} color="orange" onClick={() => signOut({ redirect: "/" })}>
+                  <>
+              
+                    <Button leftIcon={<IconWallet size={14} />} color="green" onClick={() => signOut({ redirect: "/" })}>
                       Sign out
                     </Button>
+                  </>  
                   : 
                    loginProgress 
                    ? 
@@ -424,3 +444,4 @@ export default function Navbar ({ user }) {
     </Box>
   );
 }
+

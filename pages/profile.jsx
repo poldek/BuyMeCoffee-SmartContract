@@ -3,6 +3,9 @@ import { Container} from "@mantine/core";
 import Navbar from "../components/navbar";
 import { createStyles, Avatar, Text, Group } from '@mantine/core';
 import { IconPhoneCall, IconAt } from '@tabler/icons';
+import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi'
+import isLoadingBrowser from "./hooks/isLoading";
+
 
 const useStyles = createStyles((theme) => ({
   icon: {
@@ -16,17 +19,25 @@ const useStyles = createStyles((theme) => ({
 
 function Profile({ user }) {
   const { classes } = useStyles();
+  const { address, isConnected, disconnect } = useAccount()
+  const { data, isError, isLoading } = useBalance({
+    address: address,
+  })
+
+  const loadingBrowser = isLoadingBrowser(); 
+ 
+    if (isLoading) return <div>Fetching balance…</div>
+    if (isError) return <div>Error fetching balance</div>
+ 
   return (
       <>
-        <Navbar user={user}/>
         <Container my={50}>
             <Group noWrap>
             <Avatar src="" size={94} radius="md" />
             <div>
               <Text size="xs" sx={{ textTransform: 'uppercase' }} weight={700} color="dimmed">
-                {user.id}
+                 { loadingBrowser ? isConnected  ? address : signOut() : null}
               </Text>
-
               <Text size="lg" weight={500} className={classes.name}>
                 {user.id}
               </Text>
@@ -34,7 +45,7 @@ function Profile({ user }) {
               <Group noWrap spacing={10} mt={3}>
                 <IconAt stroke={1.5} size={16} className={classes.icon} />
                 <Text size="xs" color="dimmed">
-                  {user.id}
+                  { loadingBrowser ? isConnected ? data?.formatted - data?.symbol: "" : null}
                 </Text>
               </Group>
 
